@@ -15,7 +15,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -36,7 +37,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     MatSelectModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatProgressBarModule
 
 
   ],
@@ -55,7 +58,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     MatSelectModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatProgressBarModule
   ]
 })
 export class SharedModule { }

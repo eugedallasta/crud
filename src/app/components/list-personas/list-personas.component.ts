@@ -4,17 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Persona } from 'src/app/interfaces/persona';
+import { PersonaService } from 'src/app/services/persona.service';
 import { AgregarEditarPersonaComponent } from '../agregar-editar-persona/agregar-editar-persona.component';
-
-
-const listPersonas: Persona[] = [
-  { id: 1, nombre: 'Juan', apellido: 'Perez', correo: 'jp@gmail.com', tipoDocumento: 'CC', documento: 123456789, fechaNacimiento: new Date('1990-01-01') },
-  { id: 2, nombre: 'Maria', apellido: 'Gomez', correo: 'jp@gmail.com', tipoDocumento: 'CC', documento: 123456789, fechaNacimiento: new Date('1990-01-01') },
-  { id: 3, nombre: 'Pedro', apellido: 'Perez', correo: 'jp@gmail.com', tipoDocumento: 'CC', documento: 123456789, fechaNacimiento: new Date('1990-01-01') },
-  { id: 4, nombre: 'Juan', apellido: 'Perez', correo: 'jp@gmail.com', tipoDocumento: 'CC', documento: 123456789, fechaNacimiento: new Date('1990-01-01') },
-  { id: 5, nombre: 'Maria', apellido: 'Gomez', correo: 'jp@gmail.com', tipoDocumento: 'CC', documento: 123456789, fechaNacimiento: new Date('1990-01-01') },
-  { id: 6, nombre: 'Pedro', apellido: 'Perez', correo: 'jp@gmail.com', tipoDocumento: 'CC', documento: 123456789, fechaNacimiento: new Date('1990-01-01') },
-];
 
 
 @Component({
@@ -29,7 +20,7 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog) { this.dataSource = new MatTableDataSource(listPersonas); }
+  constructor(public dialog: MatDialog, private _personaService: PersonaService) { this.dataSource = new MatTableDataSource(); }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -58,10 +49,17 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+    this.obternerPersonas();
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  obternerPersonas() {
+    this._personaService.getPersonas().subscribe(data => {
+      this.dataSource.data = data;
+    });
   }
 
 
