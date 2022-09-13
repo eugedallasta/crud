@@ -107,6 +107,9 @@
           >
             El documento es un campo <strong>requerido</strong>
           </span>
+          <span *ngIf="form.get('documento')?.hasError('pattern')">
+            Sólo caractéres numéricos
+          </span>
         </div>
       </div>
     </div>
@@ -118,6 +121,7 @@
             formControlName="fechaNacimiento"
             matInput
             [matDatepicker]="picker"
+            [max]="maxDate"
           />
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle

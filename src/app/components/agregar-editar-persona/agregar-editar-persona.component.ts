@@ -15,16 +15,17 @@ export class AgregarEditarPersonaComponent implements OnInit {
     'Libreta Cívica',
   ];
   form: FormGroup;
-
+  maxDate: Date;
 
   constructor(public dialogRef: MatDialogRef<AgregarEditarPersonaComponent>,
     private fb: FormBuilder) {
+    this.maxDate = new Date();
     this.form = this.fb.group({
       nombre: ['', [Validators.required, Validators.maxLength(20)]],
       apellido: ['', [Validators.required, Validators.maxLength(30)]],
       correo: ['', [Validators.required, Validators.email]],
       tipoDocumento: [null, Validators.required],
-      documento: [null, Validators.required],
+      documento: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
       fechaNacimiento: [null, Validators.required],
     });
   }
