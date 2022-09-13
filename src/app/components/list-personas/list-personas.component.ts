@@ -45,10 +45,6 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
     }
   }
 
-  editarPersona(persona: Persona) {
-    console.log(persona);
-  }
-
   eliminarPersona(id: number) {
     this.loading = true;
     this._personaService.deletePersona(id).subscribe(() => {
@@ -57,10 +53,11 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
     })
   }
 
-  addEditPersona() {
+  addEditPersona(id?: number) {
     const dialogRef = this.dialog.open(AgregarEditarPersonaComponent, {
       width: '550px',
       disableClose: true,
+      data: { id: id }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

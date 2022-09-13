@@ -6,6 +6,7 @@ import { ListPersonasComponent } from './components/list-personas/list-personas.
 import { AgregarEditarPersonaComponent } from './components/agregar-editar-persona/agregar-editar-persona.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared/shared.module';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 @NgModule({
@@ -20,7 +21,11 @@ import { SharedModule } from './shared/shared/shared.module';
     SharedModule
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_DATE_LOCALE, useValue: 'es-ES'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
