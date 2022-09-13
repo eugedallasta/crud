@@ -17,6 +17,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatNativeDateModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
 
 
   ],
@@ -60,7 +64,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatNativeDateModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class SharedModule { }

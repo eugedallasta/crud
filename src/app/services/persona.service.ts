@@ -20,4 +20,20 @@ export class PersonaService {
   getPersonas(): Observable<Persona[]> {
     return this.http.get<Persona[]>(`${this.myAppURL}${this.myApiURL}`);
   }
+
+  deletePersona(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.myAppURL}${this.myApiURL}${id}`);
+  }
+
+  addPersona(persona: Persona): Observable<void> {
+    return this.http.post<void>(`${this.myAppURL}${this.myApiURL}`, persona);
+  }
+
+  getPersona(id: number): Observable<Persona> {
+    return this.http.get<Persona>(`${this.myAppURL}${this.myApiURL}${id}`)
+  }
+
+  updatePersona(id: number, persona: Persona): Observable<void> {
+    return this.http.put<void>(`${this.myAppURL}${this.myApiURL}${id}`, persona);
+  }
 }

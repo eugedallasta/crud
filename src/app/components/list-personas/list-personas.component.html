@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
   <span>Listado de Personas</span>
 </mat-toolbar>
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 <mat-card>
   <mat-form-field appearance="standard">
     <mat-label>Filtro</mat-label>
@@ -62,7 +63,7 @@
         <button
           mat-icon-button
           color="primary"
-          (click)="editarPersona(element)"
+          (click)="editarPersona(element.id)"
           matTooltip="Editar {{ element.nombre }}"
         >
           <mat-icon>edit</mat-icon>
@@ -70,7 +71,7 @@
         <button
           mat-icon-button
           color="warn"
-          (click)="eliminarPersona(element)"
+          (click)="eliminarPersona(element.id)"
           matTooltip="Eliminar {{ element.nombre }}"
         >
           <mat-icon>delete</mat-icon>

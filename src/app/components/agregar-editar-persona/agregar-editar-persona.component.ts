@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Persona } from 'src/app/interfaces/persona';
+import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
   selector: 'app-agregar-editar-persona',
@@ -16,9 +18,10 @@ export class AgregarEditarPersonaComponent implements OnInit {
   ];
   form: FormGroup;
   maxDate: Date;
+  loading: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<AgregarEditarPersonaComponent>,
-    private fb: FormBuilder) {
+    private fb: FormBuilder, private _personaService: PersonaService, private _snackBar: MatSnackBar) {
     this.maxDate = new Date();
     this.form = this.fb.group({
       nombre: ['', [Validators.required, Validators.maxLength(20)]],
@@ -34,7 +37,7 @@ export class AgregarEditarPersonaComponent implements OnInit {
   }
 
   cancelar() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
   addEditPersona() {
     const persona: Persona = {
@@ -43,9 +46,22 @@ export class AgregarEditarPersonaComponent implements OnInit {
       correo: this.form.value.correo,
       tipoDocumento: this.form.value.tipoDocumento,
       documento: this.form.value.documento,
-      fechaNacimiento: this.form.value.fechaNacimiento
+      fechaNacimiento: this.form.value.fechaNacimiento.toISOString().slice(0, 10),
     }
-    console.log(persona);
+    this.loading = true;
+    this._personaService.addPersona(persona).subscribe(() => {
+      this.loading = false;
+      this.mensajeSnackBar();
+      this.dialogRef.close(true);
+
+    });
+
+  }
+
+  mensajeSnackBar() {
+    this._snackBar.open('La persona fue agregada correctamente', '', {
+      duration: 1000,
+    });
   }
 
 
